@@ -16,6 +16,7 @@ knex('users').select().then(
   });
 });
 
+
 router.post('/signup', function(req, res, next){
   var newUser = req.body;
   hashPassword(newUser, registerUser);
@@ -46,23 +47,25 @@ router.post('/signup', function(req, res, next){
 
 
 router.get('/signin', function(req, res, next){
-  nex('users').select().then(
+  knex('users').select().then(
     function(data){
       res.send(data);
     });
   });
 
 router.post('/signin', function(req, res, next){
+  // console.log(req.body);
   knex('users').first().where({
     username: req.body.username
   }).then(function(user){
     bcrypt.compare(req.body.password, user.password, function(err, match){
       if(match){
-        // req.session.user eqla to everything you got back form db (its an object) from the previous user query
+        // req.session.user equal to everything you got back form db (its an object) from the previous user query
         req.session.user = user;
         // delete key value pair for password
         delete req.session.user.password;
-        res.send(data);
+        res.status = 200;
+        res.end();
       } else {
         res.send('incorrect');
       }
@@ -71,12 +74,13 @@ router.post('/signin', function(req, res, next){
 });
 
 
-
-router.get('/new', function(req, res, next){
-  res.render('new');
+router.get('/scout', function(req, res, next){
+  knex('scouts').select().then(
+    function(data){
+      res.send(data);
+  });
 });
 
-router.post('/new', function(req, res, next){
-  console.log('new post');
-});
+
+
 module.exports = router;
