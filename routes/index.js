@@ -10,8 +10,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/signup', function(req, res, next){
-knex('users').select().then(
-  function(data){
+knex('users').select().then(function(data){
     res.send(data);
   });
 });
@@ -47,8 +46,7 @@ router.post('/signup', function(req, res, next){
 
 
 router.get('/signin', function(req, res, next){
-  knex('users').select().then(
-    function(data){
+  knex('users').select().then(function(data){
       res.send(data);
     });
   });
@@ -75,12 +73,23 @@ router.post('/signin', function(req, res, next){
 
 
 router.get('/scout', function(req, res, next){
-  knex('scouts').select().then(
-    function(data){
+  knex('scouts').select().then(function(data){
       res.send(data);
   });
 });
 
-
+// router.get('/new', function(req, res, next){
+//   knex('scouts').select().then(function(data){
+//       res.send(data);
+//     });
+// });
+//
+// router.post('/new', function(req, res, next){
+//   knex('scouts').insert({
+//     paymentAmount: req.body.paymentAmount,
+//     paymentType: req.body.paymentType,
+//     zipCode: req.body.zipCode
+//   });
+// });
 
 module.exports = router;
