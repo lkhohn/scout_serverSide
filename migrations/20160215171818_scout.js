@@ -24,8 +24,7 @@ exports.up = function(knex, Promise) {
     table.string('claimor_id');
     table.integer('paymentAmount');
     table.string('paymentType');
-    table.string('city');
-    table.string('state');
+    table.string('zipCode');
   });
 };
  exports.down = function(knex, Promise) {
